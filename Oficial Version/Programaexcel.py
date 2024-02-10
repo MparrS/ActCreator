@@ -14,7 +14,9 @@ def copiar_estilo(origen, destino):
     destino.font.name = origen.font.name
     destino.font.size = origen.font.size
 
+    #Estas son las variables que se van a a remplazar
 def modificar_documento(docx_path, nombre, cedula, cpu, monitor, diadema, pin, nombre_archivo):
+
     # Abrir el documento Word
     doc = Document(docx_path)
 
@@ -74,34 +76,33 @@ def modificar_documento(docx_path, nombre, cedula, cpu, monitor, diadema, pin, n
                             run.text = run.text.replace('#pin', pin)
                             copiar_estilo(run, run)
 
-    # Guardar el documento modificado en la carpeta 'DocumentosWord'
+    # Nombre de carpeta en la cual van a ir los words
     carpeta_word = 'Documentos Word'
     if not os.path.exists(carpeta_word):
         os.makedirs(carpeta_word)
     doc.save(os.path.join(carpeta_word, nombre_archivo + '.docx'))
 
-    # Convertir el documento modificado a PDF y guardarlo en la carpeta 'DocumentosPDF'
+    # Nombre de carpeta en la cual van a ir los PDF
     carpeta_pdf = 'Documentos PDF'
     if not os.path.exists(carpeta_pdf):
         os.makedirs(carpeta_pdf)
     convert(os.path.join(carpeta_word, nombre_archivo + '.docx'), os.path.join(carpeta_pdf, nombre_archivo + '.pdf'))
 
+
+    # Funcion para la integracion de interfaz grafica
 def abrir_ventana():
     ventana = tk.Tk()
     ventana.title("ActCreator")
     ventana.geometry("500x300")
 
-    # Función para seleccionar el archivo Word
     def seleccionar_archivo_word():
         archivo_word = filedialog.askopenfilename(filetypes=[("Word files", "*.docx")])
         ruta_word.set(archivo_word)
 
-    # Función para seleccionar el archivo Excel
     def seleccionar_archivo_excel():
         archivo_excel = filedialog.askopenfilename(filetypes=[("Excel files", "*.xlsx")])
         ruta_excel.set(archivo_excel)
 
-    # Función para generar los documentos
     def generar_documentos():
         archivo_word = ruta_word.get()
         archivo_excel = ruta_excel.get()
@@ -126,8 +127,10 @@ def abrir_ventana():
 
         wb.close()
 
-        # Mostrar mensaje después de haber terminado de generar todos los documentos
+        # Mensaje después de haber terminado de generar todos los documentos
         messagebox.showinfo("Éxito", f"Se han generado los siguientes documentos: {', '.join(documentos_generados)}")
+        
+        # Version alterna | messagebox.showinfo("Éxito", f"Se han generado todos los documentos con exito")
 
     # Variables para almacenar las rutas de los archivos
     ruta_word = tk.StringVar()
@@ -146,4 +149,4 @@ def abrir_ventana():
 
     ventana.mainloop()
 
-abrir_ventana()
+abrir_ventana() 
