@@ -6,7 +6,9 @@
 
 # Libraries required
  pip install python-tk
- pip install python-docx
- pip install docx2pdf
- pip install openpyxl
 
+ pip install python-docx
+
+ pip install docx2pdf
+
+ pip install openpyxl
