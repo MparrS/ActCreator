@@ -2,10 +2,9 @@
  script in charge of replacing word data based on excel files
 
 # Programming language
- Python
+ Python Version(most recent)
 
 # Libraries required
- pip install python-tk
 
  pip install python-docx
 
